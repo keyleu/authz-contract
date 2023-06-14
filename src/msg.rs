@@ -2,17 +2,12 @@ use cosmwasm_schema::{cw_serde, QueryResponses};
 use cosmwasm_std::Addr;
 
 #[cw_serde]
-pub struct InstantiateMsg {
-}
+pub struct InstantiateMsg {}
 
 #[cw_serde]
 pub enum ExecuteMsg {
-    TransferFunds {
-        to_address: Addr,
-    },
-    WithdrawRewards{
-        validator_address: Addr,
-    }
+    TransferFunds { to_address: Addr },
+    WithdrawRewards { validator_address: Addr },
 }
 
 #[cw_serde]
@@ -23,6 +18,6 @@ pub enum QueryMsg {
 }
 
 #[cw_serde]
-pub struct GranterResponse{
+pub struct GranterResponse {
     pub granter: Addr,
 }

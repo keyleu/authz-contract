@@ -46,7 +46,9 @@ pub fn execute(
 ) -> Result<Response, ContractError> {
     match msg {
         ExecuteMsg::TransferFunds { to_address } => execute_transfer(deps, info, env, to_address),
-        ExecuteMsg::WithdrawRewards { validator_address } => execute_withdraw_rewards(deps, info, env, validator_address),
+        ExecuteMsg::WithdrawRewards { validator_address } => {
+            execute_withdraw_rewards(deps, info, env, validator_address)
+        }
     }
 }
 
@@ -90,6 +92,7 @@ pub fn execute_transfer(
         type_url: "/cosmos.authz.v1beta1.MsgExec".to_string(),
         value: Binary::from(exec_bytes),
     };
+
     Ok(Response::new()
         .add_attribute("method", "execute_authz_transfer")
         .add_message(msg))
@@ -115,7 +118,7 @@ pub fn execute_withdraw_rewards(
         type_url: "/cosmos.authz.v1beta1.MsgExec".to_string(),
         value: Binary::from(exec_bytes),
     };
-    
+
     Ok(Response::new()
         .add_attribute("method", "execute_authz_transfer")
         .add_message(msg))
